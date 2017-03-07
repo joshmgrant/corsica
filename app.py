@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.errorhandler(400)
 def invalid_value(error):
-    return make_response(jsonify({'error': 'Invalid data request'}), 400)
+    return make_response(jsonify({'error': 'Invalid data request, check your parameters'}), 400)
 
 @app.route('/corsica/help', methods=['GET'])
 def get_help():
@@ -16,15 +16,18 @@ def get_help():
     }
     return jsonify(h)
 
-@app.route('/corsica/samples/uniform/', methods=['GET'])
+@app.route('/corsica/uniform/', methods=['GET'])
 def get_uniform(a=0.0, b=1.0, n=10):
     a = request.args.get('a', a)
     b = request.args.get('b', b)
     samples = request.args.get('n', n)
 
-    a = float(a)
-    b = float(b)
-    samples = int(samples)
+    try:
+        a = float(a)
+        b = float(b)
+        samples = int(samples)
+    except ValueError:
+        abort(400)
 
     if a > b:
         a, b = b, a
@@ -37,15 +40,18 @@ def get_uniform(a=0.0, b=1.0, n=10):
     r = random.uniform(a, b, samples).tolist()
     return jsonify({'samples' : r })
 
-@app.route('/corsica/samples/normal/', methods=['GET'])
+@app.route('/corsica/normal/', methods=['GET'])
 def get_normal_dist(mu=0.0, sigma=1.0, n=10):
     m = request.args.get('mu', mu)
     s = request.args.get('sigma', sigma)
     samples = request.args.get('n', n)
 
-    m = float(m)
-    s = float(s)
-    samples = int(samples)
+    try:
+        m = float(m)
+        s = float(s)
+        samples = int(samples)
+    except ValueError:
+        abort(400)
 
     if samples <= 0:
         abort(400)
@@ -53,13 +59,16 @@ def get_normal_dist(mu=0.0, sigma=1.0, n=10):
     r = random.normal(m, s, samples).tolist()
     return jsonify({'samples' : r })
 
-@app.route('/corsica/samples/exponential/', methods=['GET'])
+@app.route('/corsica/exponential/', methods=['GET'])
 def get_exponential(l=1.0, n=10):
     m = request.args.get('l', l)
     samples = request.args.get('n', n)
 
-    l = float(l)
-    samples = int(samples)
+    try:
+        l = float(l)
+        samples = int(samples)
+    except ValueError:
+        abort(400)
 
     if samples <= 0:
         abort(400)
