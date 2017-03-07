@@ -20,7 +20,7 @@ samples = [
 
 @app.errorhandler(404)
 def invalid_value(error):
-    return make_response(jsonify({'error': 'Invalid sample value, must be positive integer'}), 404)
+    return make_response(jsonify({'error': 'Invalid data request'}), 404)
 
 @app.route('/corsica/help', methods=['GET'])
 def get_help():
@@ -30,15 +30,22 @@ def get_help():
     }
     return jsonify(h)
 
-@app.route('/corsica/samples/uniform/<int:samples>', methods=['GET'])
-def get_uniform(samples):
+@app.route('/corsica/samples/uniform/', methods=['GET'])
+def get_uniform(a=0, b=1, n=1):
+    a = request.args.get('a', a)
+    b = request.args.get('b', b)
+    samples = request.args.get('n', n)
+
+    if a > b:
+        a, b = b, a
+    elif a == b:
+        abort(404)
+
     if samples <= 0:
         abort(404)
     
-    r = random.uniform(0,1,samples).tolist()
+    r = random.uniform(a, b, samples).tolist()
     return jsonify({'samples' : r })
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
