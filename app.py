@@ -3,9 +3,9 @@ from numpy import random
 
 app = Flask(__name__)
 
-@app.errorhandler(404)
+@app.errorhandler(400)
 def invalid_value(error):
-    return make_response(jsonify({'error': 'Invalid data request'}), 404)
+    return make_response(jsonify({'error': 'Invalid data request'}), 400)
 
 @app.route('/corsica/help', methods=['GET'])
 def get_help():
@@ -28,10 +28,10 @@ def get_uniform(a=0.0, b=1.0, n=1):
     if a > b:
         a, b = b, a
     elif abs(a - b) < 0.0001:
-        abort(404)
+        abort(400)
 
     if samples <= 0:
-        abort(404)
+        abort(400)
     
     r = random.uniform(a, b, samples).tolist()
     return jsonify({'samples' : r })
@@ -47,7 +47,7 @@ def get_normal_dist(mu=0, sigma=1, n=1):
     samples = int(samples)
 
     if samples <= 0:
-        abort(404)
+        abort(400)
     
     r = random.normal(m, s, samples).tolist()
     return jsonify({'samples' : r })
@@ -61,7 +61,7 @@ def get_exponential(l=1.0, n=1):
     samples = int(samples)
 
     if samples <= 0:
-        abort(404)
+        abort(400)
     
     r = random.exponential(l, samples).tolist()
     return jsonify({'samples' : r })
