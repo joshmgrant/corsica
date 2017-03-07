@@ -11,7 +11,7 @@ def invalid_value(error):
 def get_help():
     h = {
         'title' : u'Corsica - Restful Random Samples',
-        'description' : u'Return a list of samples of a desired distribution. Supported options are uniform[a,b], normal(mean, sigma) and exponential(l)'
+        'description' : u'Return a list of samples of a desired distribution. Supported options are uniform[a,b], normal(mu, sigma) and exponential(l)'
     }
     return jsonify(h)
 
@@ -27,7 +27,7 @@ def get_uniform(a=0.0, b=1.0, n=1):
 
     if a > b:
         a, b = b, a
-    elif a == b:
+    elif abs(a - b) < 0.0001:
         abort(404)
 
     if samples <= 0:
@@ -37,8 +37,8 @@ def get_uniform(a=0.0, b=1.0, n=1):
     return jsonify({'samples' : r })
 
 @app.route('/corsica/samples/normal/', methods=['GET'])
-def get_normal_dist(mean=0, sigma=1, n=1):
-    m = request.args.get('mean', mean)
+def get_normal_dist(mu=0, sigma=1, n=1):
+    m = request.args.get('mu', mu)
     s = request.args.get('sigma', sigma)
     samples = request.args.get('n', n)
 
@@ -50,6 +50,20 @@ def get_normal_dist(mean=0, sigma=1, n=1):
         abort(404)
     
     r = random.normal(m, s, samples).tolist()
+    return jsonify({'samples' : r })
+
+@app.route('/corsica/samples/exponential/', methods=['GET'])
+def get_exponential(l=1.0, n=1):
+    m = request.args.get('l', l)
+    samples = request.args.get('n', n)
+
+    l = float(l)
+    samples = int(samples)
+
+    if samples <= 0:
+        abort(404)
+    
+    r = random.exponential(l, samples).tolist()
     return jsonify({'samples' : r })
 
 if __name__ == '__main__':
