@@ -12,7 +12,7 @@ def invalid_value(error):
 def get_help():
     h = {
         'title' : u'Corsica - Restful Random Samples',
-        'description' : u'Return a list of samples of a desired distribution. Supported options are uniform[a,b], normal(mu, sigma) and exponential(l)'
+        'description' : u'Return a list of samples of a desired distribution. Supported options are uniform(a,b), normal(mu, sigma) and exponential(l)'
     }
     return jsonify(h)
 
