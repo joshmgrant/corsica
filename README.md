@@ -29,12 +29,12 @@ https://[corsica-domain-host]/corsica/[distribution-name]/?[optional-parameter-l
 ```
 where [terms in brackets] are modified as needed.
 
-Currently Corsica is being hosted on App Engine. We can generate ten random sample according to a standard normal distribution like this:
+Currently Corsica is being hosted on App Engine. We can generate ten random samples of a standard normal distribution like this:
 ```bash
 curl "https://corsica-160818.appspot.com/corsica/normal/"
 ```
 
-The result of this call wil include a JSON response that looks like this:
+The result of this call will include a JSON response that looks like this:
 ```
 {
     "samples": [
@@ -53,17 +53,17 @@ The result of this call wil include a JSON response that looks like this:
 ```
 By default all distribution requests return ten samples. This can be changed by including a parameter `n` as part of the request.
 
-Suppose we wanted thirty samples of a normal distribution with a mean of 100 and standard deviation of 10, then the call would look like this:
+Suppose we wanted thirty samples of a normal distribution with a mean of 100 and standard deviation of 10, then the request would look like this:
 ```bash
 curl "https://corsica-160818.appspot.com/corsica/normal/?mu=100&sigma=10&n=30"
 ```
 
-If we wanted six samples of a uniformly distributed random variable from the interval `[-1,1]` then the call would look like this:
+If we wanted six samples of a uniformly distributed random variable from the interval `[-1,1]` then the request would look like this:
 ```bash
 curl "https://corsica-160818.appspot.com/corsica/uniform/?a=-1&b=1&n=6"
 ```
 
-And lastly, we might want fifty samples of a standard exponential distribution (ie having rate parameter of 1) which would look like this:
+As a final example, we might want fifty samples of a standard exponential distribution (ie having rate parameter of 1) which would look like this:
 ```bash    
 curl "https://corsica-160818.appspot.com/corsica/exponential/?lambda=1&n=50
 ```
