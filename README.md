@@ -6,7 +6,7 @@ Corsica is a RESTful service for generating random samples of some common probab
 
 ### Why Corsica?
 
-Samples of random variables can be helpful in many settings. Having a service to generate them on demand would be even more helpful. Corsica tries to accomplish this in a light and straightforward way. All that's needed is an Internet connection and a utility like `curl`.
+Samples of random variables can be helpful in many settings. Having a service to generate them on demand would be even more helpful. Corsica tries to accomplish this in a light and straightforward way. All that's needed is an Internet connection and a utility like `curl` or [`Invoke-RestMethod`](https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.utility/Invoke-RestMethod) if you are using Windows/PowerShell.
 
 ### Ok, But Why the Name - Corsica?
 
@@ -24,12 +24,14 @@ Currently supported probability distributions are:
 ### Example Usage
 
 The usage of Corsica is pretty straightforward. You can send a request to a utility like `curl` using the following URL format:
-    https://[corsica-domain-host]/corsica/[distribution-name]/?[optional-parameter-list]
+```bash
+https://[corsica-domain-host]/corsica/[distribution-name]/?[optional-parameter-list]
+```
 where [terms in brackets] are modified as needed.
 
 Currently Corsica is being hosted on App Engine. We can generate ten random sample according to a standard normal distribution like this:
 ```bash
-    curl "https://corsica-160818.appspot.com/corsica/normal/"
+curl "https://corsica-160818.appspot.com/corsica/normal/"
 ```
 
 The result of this call wil include a JSON response that looks like this:
