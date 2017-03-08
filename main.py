@@ -3,7 +3,6 @@ from numpy import random
 
 app = Flask(__name__)
 
-
 @app.errorhandler(400)
 def invalid_value(error):
     return make_response(jsonify({'error': 'Invalid data request, check your parameters'}), 400)
@@ -61,7 +60,7 @@ def get_normal_dist(mu=0.0, sigma=1.0, n=10):
 
 @app.route('/corsica/exponential/', methods=['GET'])
 def get_exponential(l=1.0, n=10):
-    m = request.args.get('l', l)
+    m = request.args.get('lambda', l)
     samples = request.args.get('n', n)
 
     try:

@@ -1,3 +1,5 @@
+## Corsica 
+
 ### Introduction
 
 Corsica is a RESTful service for generating random samples of some common probability distributions. It is powered by Python's [NumPy](http://www.numpy.org/) and meant to be a readily available RESTful service. 
@@ -26,34 +28,43 @@ The usage of Corsica is pretty straightforward. You can send a request to a util
 where [terms in brackets] are modified as needed.
 
 Currently Corsica is being hosted on App Engine. We can generate ten random sample according to a standard normal distribution like this:
+```bash
     curl "https://corsica-160818.appspot.com/corsica/normal/"
+```
 
 The result of this call wil include a JSON response that looks like this:
-    {
-        "samples": [
-        -1.2096389665914025,
-        -1.2178412840647694,
-        0.87484478860914194,
-        -0.10221096468421056,
-        -1.4029492254105926,
-        -0.58021804765788776,
-        1.6849096449134444,
-        -0.92958572655255245,
-        0.91775972948358275,
-        0.31236704243695446
-        ]
-    }
-
+```
+{
+    "samples": [
+    -1.2096389665914025,
+    -1.2178412840647694,
+    0.87484478860914194,
+    -0.10221096468421056,
+    -1.4029492254105926,
+    -0.58021804765788776,
+    1.6849096449134444,
+    -0.92958572655255245,
+    0.91775972948358275,
+    0.31236704243695446
+    ]
+}
+```
 By default all distribution requests return ten samples. This can be changed by including a parameter `n` as part of the request.
 
 Suppose we wanted thirty samples of a normal distribution with a mean of 100 and standard deviation of 10, then the call would look like this:
-    curl "https://corsica-160818.appspot.com/corsica/normal/?mu=100&sigma=10&n=30"
+```bash
+curl "https://corsica-160818.appspot.com/corsica/normal/?mu=100&sigma=10&n=30"
+```
 
 If we wanted six samples of a uniformly distributed random variable from the interval `[-1,1]` then the call would look like this:
-    curl "https://corsica-160818.appspot.com/corsica/uniform/?a=-1&b=1&n=6"
+```bash
+curl "https://corsica-160818.appspot.com/corsica/uniform/?a=-1&b=1&n=6"
+```
 
 And lastly, we might want fifty samples of a standard exponential distribution (ie having rate parameter of 1) which would look like this:
-    curl "https://corsica-160818.appspot.com/corsica/exponential/?l=1&n=50
+```bash    
+curl "https://corsica-160818.appspot.com/corsica/exponential/?lambda=1&n=50
+```
 
 Parameters are optional for each service request. Parameter names try to follow probability theory conventions so please see links above for any confusion about what are acceptable parameter values for each distribution if you aren't sure. If problems persist, please talk to your local statistician.
 
