@@ -8,6 +8,6 @@ handlers:
 - url: /.*
   script: main.app
 
- libraries:
+libraries:
 - name: numpy
   version: "1.12.0" 
