@@ -52,6 +52,9 @@ def get_normal_dist(mu=0.0, sigma=1.0, n=10):
     except ValueError:
         abort(400)
 
+    if s <= 0.0:
+        abort(400)
+
     if samples <= 0:
         abort(400)
     
@@ -60,7 +63,7 @@ def get_normal_dist(mu=0.0, sigma=1.0, n=10):
 
 @app.route('/corsica/exponential/', methods=['GET'])
 def get_exponential(l=1.0, n=10):
-    m = request.args.get('lambda', l)
+    l = request.args.get('lambda', l)
     samples = request.args.get('n', n)
 
     try:
@@ -72,6 +75,9 @@ def get_exponential(l=1.0, n=10):
     if samples <= 0:
         abort(400)
     
+    if l <= 0.0:
+        abort(400)
+
     r = random.exponential(l, samples).tolist()
     return jsonify({'samples' : r })
 
