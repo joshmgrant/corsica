@@ -1,4 +1,4 @@
-from flask import jsonify, abort, make_response, request
+from flask import jsonify, abort, request
 from numpy import random
 
 
@@ -19,7 +19,6 @@ def normal_dist(mu=0.0, sigma=1.0, n=10):
 
     if samples <= 0:
         abort(400)
-    
-    r = random.normal(m, s, samples).tolist()
-    return jsonify({'samples' : r })
 
+    r = random.normal(m, s, samples).tolist()
+    return jsonify({'samples': r})

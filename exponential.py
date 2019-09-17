@@ -1,21 +1,22 @@
-from flask import jsonify, abort, make_response, request
+from flask import jsonify, abort, request
 from numpy import random
 
-def exponential_dist(l=1.0, n=10):
-    l = request.args.get('lambda', l)
+
+def exponential_dist(lam=1.0, n=10):
+    ld = request.args.get('lambda', lam)
     samples = request.args.get('n', n)
 
     try:
-        l = float(l)
+        ld = float(ld)
         samples = int(samples)
     except ValueError:
         abort(400)
 
     if samples <= 0:
         abort(400)
-    
-    if l <= 0.0:
+
+    if ld <= 0.0:
         abort(400)
 
-    r = random.exponential(l, samples).tolist()
-    return jsonify({'samples' : r })
+    r = random.exponential(ld, samples).tolist()
+    return jsonify({'samples': r})

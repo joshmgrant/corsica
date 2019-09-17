@@ -1,4 +1,4 @@
-from flask import jsonify, abort, make_response, request
+from flask import jsonify, abort, request
 from numpy import random
 
 
@@ -21,6 +21,6 @@ def uniform_dist(a=0.0, b=1.0, n=10):
 
     if samples <= 0:
         abort(400)
-    
+
     r = random.uniform(a, b, samples).tolist()
-    return jsonify({'samples' : r })
+    return jsonify({'samples': r})
