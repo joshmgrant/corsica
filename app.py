@@ -1,5 +1,8 @@
 from flask import Flask, jsonify, abort, make_response, request, render_template
 from numpy import random
+from normal import normal_dist
+from uniform import uniform_dist
+from exponential import exponential_dist
 
 app = Flask(__name__)
 
@@ -22,69 +25,15 @@ def get_help():
 
 @app.route('/corsica/uniform/', methods=['GET'])
 def get_uniform(a=0.0, b=1.0, n=10):
-    a = request.args.get('a', a)
-    b = request.args.get('b', b)
-    samples = request.args.get('n', n)
-
-    try:
-        a = float(a)
-        b = float(b)
-        samples = int(samples)
-    except ValueError:
-        abort(400)
-
-    if a > b:
-        a, b = b, a
-    elif abs(a - b) < 0.0001:
-        abort(400)
-
-    if samples <= 0:
-        abort(400)
-    
-    r = random.uniform(a, b, samples).tolist()
-    return jsonify({'samples' : r })
+    return uniform_dist(a, b, n)
 
 @app.route('/corsica/normal/', methods=['GET'])
 def get_normal_dist(mu=0.0, sigma=1.0, n=10):
-    m = request.args.get('mu', mu)
-    s = request.args.get('sigma', sigma)
-    samples = request.args.get('n', n)
-
-    try:
-        m = float(m)
-        s = float(s)
-        samples = int(samples)
-    except ValueError:
-        abort(400)
-
-    if s <= 0.0:
-        abort(400)
-
-    if samples <= 0:
-        abort(400)
-    
-    r = random.normal(m, s, samples).tolist()
-    return jsonify({'samples' : r })
+    return normal_dist(mu, sigma, n)
 
 @app.route('/corsica/exponential/', methods=['GET'])
 def get_exponential(l=1.0, n=10):
-    l = request.args.get('lambda', l)
-    samples = request.args.get('n', n)
-
-    try:
-        l = float(l)
-        samples = int(samples)
-    except ValueError:
-        abort(400)
-
-    if samples <= 0:
-        abort(400)
-    
-    if l <= 0.0:
-        abort(400)
-
-    r = random.exponential(l, samples).tolist()
-    return jsonify({'samples' : r })
+    return exponential_dist(l,n)
 
 if __name__ == '__main__':
     app.run(debug=True)
