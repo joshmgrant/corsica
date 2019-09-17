@@ -1,7 +1,12 @@
-from flask import Flask, jsonify, abort, make_response, request
+from flask import Flask, jsonify, abort, make_response, request, render_template
 from numpy import random
 
 app = Flask(__name__)
+
+@app.route('/')
+@app.route('/corsica/')
+def home_page():
+    return render_template('home.html')
 
 @app.errorhandler(400)
 def invalid_value(error):
