@@ -1,4 +1,3 @@
-Flask
-numpy
-pytest
-gunicorn
+fastapi
+uvicorn
+
