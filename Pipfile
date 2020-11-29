@@ -16,3 +16,4 @@ python_version = "3.7"
 [scripts]
 'test' = 'python -m pytest'
 'start' = 'uvicorn main:app --reload'
+'linter' = 'echo "Run black"'
