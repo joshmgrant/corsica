@@ -36,6 +36,6 @@ jobs:
         uvicorn main:app --reload &
     - name: Integration test
       run: |
-        python -m pytest test/test_e2e.py
+        python -m pytest tests/test_e2e.py
 
 
