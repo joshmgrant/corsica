@@ -33,7 +33,7 @@ jobs:
         python -m pytest tests/unit/
     - name: Test deploy
       run: |
-        uvicorn main:app --reload
+        uvicorn main:app --reload &
     - name: Integration test
       run: |
         python -m pytest test/test_e2e.py
