@@ -37,5 +37,7 @@ jobs:
     - name: Integration test
       run: |
         python -m pytest tests/test_e2e.py
-
+    - name: Deploy
+        env: ${{  secrets.DETA_ACCESS_KEY }}
+	deta deploy
 
