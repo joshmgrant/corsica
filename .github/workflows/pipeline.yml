@@ -38,6 +38,7 @@ jobs:
       run: |
         python -m pytest tests/test_e2e.py
     - name: Deploy
-        env: ${{  secrets.DETA_ACCESS_KEY }}
-	run: deta deploy
-
+      env: 
+        DETA_ACCESS_KEY: ${{ secrets.DETA_ACCESS_KEY }}
+      run: |
+        deta deploy

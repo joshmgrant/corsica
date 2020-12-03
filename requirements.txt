@@ -2,4 +2,5 @@ fastapi
 uvicorn
 pytest
 requests
+flake8
 
