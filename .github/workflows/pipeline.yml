@@ -25,6 +25,8 @@ jobs:
     - name: Install dependencies
       run: |
         curl -fsSL https://get.deta.dev/cli.sh | sh
+        echo DETA_PROJECT_KEY=$DETA_PROJECT_KEY >> .env
+        ~/.deta/bin/deta update --env .env
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Linter
@@ -45,6 +47,3 @@ jobs:
         cp -r tmp/.deta corsica/
         cp requirements.txt corsica/
         ~/.deta/bin/deta deploy corsica
-        cd corsica
-        echo DETA_PROJECT_KEY=$DETA_PROJECT_KEY >> .env
-        ~/.deta/bin/deta update --env .env
