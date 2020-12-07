@@ -45,3 +45,6 @@ jobs:
         cp -r tmp/.deta corsica/
         cp requirements.txt corsica/
         ~/.deta/bin/deta deploy corsica
+        cd corsica
+        echo DETA_PROJECT_KEY=$DETA_PROJECT_KEY >> .env
+        ~/.deta/bin/deta update --env .env
