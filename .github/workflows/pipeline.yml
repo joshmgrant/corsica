@@ -13,7 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env: 
+      DETA_ACCESS_KEY: ${{ secrets.DETA_ACCESS_KEY }}
+    
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.7
@@ -22,6 +24,7 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: |
+        curl -fsSL https://get.deta.dev/cli.sh | sh
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Linter
@@ -37,8 +40,8 @@ jobs:
       run: |
         python -m pytest tests/test_e2e.py
     - name: Deploy
-      env: 
-        DETA_ACCESS_KEY: ${{ secrets.DETA_ACCESS_KEY }}
       run: |
-        curl -fsSL https://get.deta.dev/cli.sh | sh
-        deta deploy
+        ~/.deta/bin/deta clone --name corsica --project corsica tmp/
+        cp -r tmp/.deta corsica/
+        cp requirements.txt corsica/
+        ~/.deta/bin/deta deploy corsica
