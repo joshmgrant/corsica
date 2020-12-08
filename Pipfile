@@ -9,6 +9,7 @@ verify_ssl = true
 fastapi = "*"
 uvicorn = "*"
 pytest = "*"
+numpy = "*"
 requests = "*"
 flake8 = "*"
 
@@ -16,6 +17,7 @@ flake8 = "*"
 python_version = "3.7"
 
 [scripts]
-'test' = 'python -m pytest'
+'unit-test' = 'python -m pytest tests/unit/'
+'e2e-test' = 'python -m pytest tests/test_e2e.py'
 'start' = 'uvicorn main:app --reload'
 'linter' = 'flake8 .'
