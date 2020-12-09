@@ -2,6 +2,7 @@ from typing import Optional
 
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from fastapi.responses import RedirectResponse
 
 from corsica.distributions import uniform
 from corsica.distributions import normal
@@ -14,16 +15,7 @@ app = FastAPI()
 @app.get('/')
 @app.get("/corsica")
 def read_root():
-    html_content = """
-    <title>Corsica</title>
-    <body>
-        <h1>Hello! Welcome to Corsica!</h1>
-        <br />
-        <p>Corsica provides random numbers as a service</p>
-        <p>See the <a href="https://github.com/joshmgrant/corsica">project</a> for more information.
-    </body>
-    """
-    return HTMLResponse(content=html_content, status_code=200)
+    return RedirectResponse("https://github.com/joshmgrant/corsica/blob/main/README.md")
 
 
 @app.get("/uniform/{size}")

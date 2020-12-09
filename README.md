@@ -23,11 +23,15 @@ Currently supported probability distributions are:
 
 ### Example Usage
 
-Currently under construction. Watch this space!
+See the [interactive documentation](https://knjst0.deta.dev/docs) for examples of how to generate samples of each distribution.
 
 ### Technical Details
 
-Currently being heavily refactored. Watch this space!
+This is a cutting art, state of the edge project, built with:
+
+- [FastAPI](https://fastapi.tiangolo.com/) for the API layer
+- [Deta](https://docs.deta.sh/) for hosting the application
+- [Pipenv](https://pipenv.pypa.io/en/latest/) for general dependency management and scripting
 
 ### Questions or Concerns?
 
