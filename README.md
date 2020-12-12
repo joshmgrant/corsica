@@ -35,6 +35,6 @@ This is a cutting art, state of the edge project, built with:
 
 ### Questions or Concerns?
 
-Pull requests and issues are gratefully welcome on this project! Please let me know if I've made any glaring errors or omissions. 
+Let me know how I'm doing. Please try this out and post bugs or issues. 
 
-You can also find me on [Twitter](https://twitter.com/joshin4colours). Thank you for your interest!
+You can also find me on [Twitter](https://twitter.com/joshin4colours). Thank you for your interest.
