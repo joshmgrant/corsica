@@ -1,7 +1,6 @@
 from typing import Optional
 
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
 
 from corsica.distributions import uniform
@@ -13,12 +12,18 @@ app = FastAPI()
 
 
 @app.get('/')
-@app.get("/corsica")
+@app.get("/corsica", tags=["Root"])
 def read_root():
+    """
+    Root of the project, should return some kind of helpful documentation for users.
+    """
     return RedirectResponse("https://github.com/joshmgrant/corsica/blob/main/README.md")
 
 
-@app.get("/uniform/{size}")
+@app.get("/uniform/{size}",
+         tags=["Distributions"],
+         summary="Continuous Uniform Distribution",
+         description="Returns a list of samples of a uniform distribution on the interval [a,b]")
 def get_uniform(size: int, lower_bound: Optional[float] = None, upper_bound: Optional[float] = None):
     lower_bound = lower_bound if lower_bound else 0.0
     upper_bound = upper_bound if upper_bound else 1.0
@@ -30,7 +35,10 @@ def get_uniform(size: int, lower_bound: Optional[float] = None, upper_bound: Opt
     return {"lower": lower_bound, "upper": upper_bound, "values": values_list}
 
 
-@app.get("/normal/{size}")
+@app.get("/normal/{size}",
+         tags=["Distributions"],
+         summary="Normal Distribution",
+         description="Returns a list of samples of a normal distribution with mean mu and variance sigma^2")
 def get_normal(size: int, mu: Optional[float] = None, sigma: Optional[float] = None):
     mu = mu if mu else 0.0
     sigma = sigma if sigma else 1.0
@@ -39,7 +47,10 @@ def get_normal(size: int, mu: Optional[float] = None, sigma: Optional[float] = N
     return {"mu": mu, "sigma": sigma, "values": values_list}
 
 
-@app.get("/exponential/{size}")
+@app.get("/exponential/{size}",
+         tags=["Distributions"],
+         summary="Exponential Distribution",
+         description="Returns a list of samples of an exponential distribution with parameter lam`")
 def get_exponential(size: int, lam: Optional[float] = None):
     lam = lam if lam else 1.0
 
