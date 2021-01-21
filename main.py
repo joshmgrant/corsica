@@ -8,7 +8,11 @@ from corsica.distributions import normal
 from corsica.distributions import exponential
 
 
-app = FastAPI()
+app = FastAPI(
+    title="Corisca - Randon Numbers as a Service",
+    description="Corsica is a service that provides lists of random samples on demand.",
+    version="1.0.0"
+)
 
 
 @app.get('/')
