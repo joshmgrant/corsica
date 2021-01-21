@@ -23,7 +23,7 @@ Currently supported probability distributions are:
 
 ### Example Usage
 
-See the [interactive documentation](https://knjst0.deta.dev/docs) for examples of how to generate samples of each distribution.
+See the [interactive documentation](https://corsica.joshgrant.online/docs) for examples of how to generate samples of each distribution.
 
 ### Technical Details
 
