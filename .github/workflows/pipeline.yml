@@ -29,7 +29,7 @@ jobs:
         echo "Run Linter"
     - name: Unit tests
       run: |
-        poetry -vvv run pytest tests/unit/
+        poetry run pytest tests/unit/
     - name: Test deploy
       run: |
         uvicorn main:app --reload &
