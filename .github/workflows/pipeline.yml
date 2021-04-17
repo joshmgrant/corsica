@@ -22,17 +22,16 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
     - name: Linter
       run: |
         echo "Run Linter"
     - name: Unit tests
       run: |
-        python -m pytest tests/unit/
+        poetry run pytest tests/unit/
     - name: Test deploy
       run: |
         uvicorn main:app --reload &
     - name: Integration test
       run: |
-        python -m pytest tests/test_e2e.py
+        poetry run pytest tests/test_e2e.py
