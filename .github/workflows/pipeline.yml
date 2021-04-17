@@ -35,7 +35,7 @@ jobs:
         poetry run pytest tests/unit/
     - name: Test deploy
       run: |
-        uvicorn main:app --reload &
+        poetry run uvicorn main:app --reload &
     - name: Integration test
       run: |
         poetry run pytest tests/test_e2e.py
