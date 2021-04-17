@@ -23,13 +23,12 @@ jobs:
     - name: Install dependencies
       run: |
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-        source $HOME/.poetry/env
     - name: Linter
       run: |
         echo "Run Linter"
     - name: Unit tests
       run: |
-        poetry run pytest tests/unit/
+        poetry -vvv run pytest tests/unit/
     - name: Test deploy
       run: |
         uvicorn main:app --reload &
