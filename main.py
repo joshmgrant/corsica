@@ -14,18 +14,18 @@ origins = [
     "http://localhost:5000/"
 ]
 
+app = FastAPI(
+    title="Corisca - Random Numbers as a Service",
+    description="Corsica is a service that provides lists of random samples on demand.",
+    version="1.0.0"
+)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-)
-
-app = FastAPI(
-    title="Corisca - Random Numbers as a Service",
-    description="Corsica is a service that provides lists of random samples on demand.",
-    version="1.0.0"
 )
 
 
