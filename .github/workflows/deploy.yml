@@ -1,29 +1,12 @@
 name: deploy
-
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+on: push
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      DETA_ACCESS_TOKEN: ${{ secrets.DETA_ACCESS_TOKEN }}
-      DETA_PROJECT_KEY: ${{ secrets.DETA_PROJECT_KEY }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Deta CLI
-      run: |
-        curl -fsSL https://get.deta.dev/cli.sh | sh
-    - name: Deploy
-      run: |
-        ~/.deta/bin/deta clone --name corsica --project corsica tmp/
-        cp -r tmp/.deta corsica/
-        cp requirements.txt corsica/
-        ~/.deta/bin/deta deploy corsica
-    - name: Set up environment variables
-      run: |
-        cd corsica
-        echo DETA_PROJECT_KEY=$DETA_PROJECT_KEY >> .env
-        ~/.deta/bin/deta update --env .env
+      - uses: actions/checkout@v2 #Be sure you check-out the repo first. Deta CLI needs access to the files
+      - uses: BogDAAAMN/deta-deploy-action@v1.0.0
+        with:
+          deta-access-token: ${{ secrets.DETA_TOKEN }} #Deta access token https://docs.deta.sh/docs/cli/auth
+          deta-name: 'corsica' #Deta Micro name https://docs.deta.sh/docs/cli/commands/#deta-clone

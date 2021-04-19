@@ -1,4 +1,3 @@
-import pytest
 from corsica.distributions import uniform
 
 
