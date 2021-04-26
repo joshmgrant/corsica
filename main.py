@@ -30,12 +30,21 @@ app.add_middleware(
 
 
 @app.get('/')
-@app.get("/corsica", tags=["Root"])
+@app.get("/corsica")
 def read_root():
     """
     Root of the project, should return some kind of helpful documentation for users.
     """
     return RedirectResponse("https://github.com/joshmgrant/corsica/blob/main/README.md")
+
+
+@app.get("/uniform/",
+         tags=["Distributions"],
+         summary="Continuous Uniform Distribution - Single Value",
+         description="Returns a single random value from a standard uniform distribution")
+def get_single_uniform():
+    value = uniform(1, 0.0, 1.0)
+    return {"value": value}
 
 
 @app.get("/uniform/{size}",
@@ -53,6 +62,15 @@ def get_uniform(size: int, lower_bound: Optional[float] = None, upper_bound: Opt
     return {"lower": lower_bound, "upper": upper_bound, "values": values_list}
 
 
+@app.get("/normal/",
+         tags=["Distributions"],
+         summary="Continuous Normal Distribution - Single Value",
+         description="Returns a single random value from a standard normal distribution")
+def get_single_normal():
+    value = normal(1, 0.0, 1.0)
+    return {"value": value}
+
+
 @app.get("/normal/{size}",
          tags=["Distributions"],
          summary="Normal Distribution",
@@ -63,6 +81,15 @@ def get_normal(size: int, mu: Optional[float] = None, sigma: Optional[float] = N
 
     values_list = normal(size, mu, sigma)
     return {"mu": mu, "sigma": sigma, "values": values_list}
+
+
+@app.get("/exponential/",
+         tags=["Distributions"],
+         summary="Continuous Exponential Distribution - Single Value",
+         description="Returns a single random value from a standard exponential distribution")
+def get_single_exponential():
+    value = exponential(1, 1.0)
+    return {"value": value}
 
 
 @app.get("/exponential/{size}",
