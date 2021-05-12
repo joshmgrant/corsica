@@ -31,7 +31,7 @@ This is a cutting art, state of the edge project, built with:
 
 - [FastAPI](https://fastapi.tiangolo.com/) for the API layer
 - [Deta](https://docs.deta.sh/) for hosting the application
-- [Pipenv](https://pipenv.pypa.io/en/latest/) for general dependency management and scripting
+- [Poetry](https://python-poetry.org/) for general dependency management and scripting
 
 ### Questions or Concerns?
 
