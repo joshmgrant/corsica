@@ -6,7 +6,6 @@ authors = ["joshgrant <joshua.m.grant@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-fastapi = "*"
 uvicorn = "*"
 pytest = "*"
 numpy = "*"
