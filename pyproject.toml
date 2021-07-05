@@ -15,6 +15,7 @@ flake8 = "*"
 opentelemetry-api = "^1.3.0"
 opentelemetry-sdk = "^1.3.0"
 opentelemetry-exporter-otlp-proto-grpc = "^1.3.0"
+pydantic = "^1.8.2"
 
 [tool.poetry.dev-dependencies]
 
