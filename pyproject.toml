@@ -12,6 +12,9 @@ pytest = "*"
 numpy = "*"
 requests = "*"
 flake8 = "*"
+opentelemetry-api = "^1.3.0"
+opentelemetry-sdk = "^1.3.0"
+opentelemetry-exporter-otlp-proto-grpc = "^1.3.0"
 
 [tool.poetry.dev-dependencies]
 
