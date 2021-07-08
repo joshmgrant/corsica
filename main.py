@@ -69,7 +69,6 @@ def read_root():
     return RedirectResponse("https://github.com/joshmgrant/corsica/blob/main/README.md")
 
 
-
 @app.get("/uniform/",
          tags=["Distributions"],
          summary="Continuous Uniform Distribution - Single Value",
