@@ -30,6 +30,7 @@ def read_root():
     """
     Root of the project, should return some kind of helpful documentation for users.
     """
+
     return RedirectResponse("https://github.com/joshmgrant/corsica/blob/main/README.md")
 
 
