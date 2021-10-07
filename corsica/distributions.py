@@ -1,8 +1,9 @@
-from numpy.random import default_rng
+from random import uniform as uniform_rng
+from random import gauss, expovariate
 
 
 def uniform(size: int = 10, lower_bound: float = 0.0, upper_bound: float = 1.0) -> list:
-    rng = default_rng()
+
     if lower_bound is None:
         raise TypeError("Expected lower bound, did not receive one")
 
@@ -15,23 +16,23 @@ def uniform(size: int = 10, lower_bound: float = 0.0, upper_bound: float = 1.0) 
     if lower_bound > upper_bound:
         lower_bound, upper_bound = upper_bound, lower_bound
 
-    return [rng.uniform(lower_bound, upper_bound) for i in range(size)]
+    return [uniform_rng(lower_bound, upper_bound) for i in range(size)]
 
 
 def normal(size: int = 10, mu: float = 0.0, sigma: float = 1.0) -> list:
-    rng = default_rng()
+
     if mu is None:
         raise TypeError("Expected lower bound, did not receive one")
 
     if sigma is None:
         raise TypeError("Expected upper bound, did not receive one")
 
-    return [rng.normal(mu, sigma) for i in range(size)]
+    return [gauss(mu, sigma) for i in range(size)]
 
 
 def exponential(size: int = 10, lam: float = 1.0) -> list:
-    rng = default_rng()
+
     if lam <= 0.0:
         raise TypeError('Lambda parameter must be positive')
 
-    return [rng.exponential(lam) for i in range(size)]
+    return [expovariate(lam) for i in range(size)]
