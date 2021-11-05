@@ -30,15 +30,15 @@ jobs:
     - name: Linter
       run: |
         poetry run flake8
-    - name: Create requirements.txt
-      run: |
-        poetry export > requirements.txt
-    - name: Unit tests
-      run: |
-        poetry run pytest tests/unit/
     - name: Test deploy
       run: |
         poetry run uvicorn main:app --reload &
+    - uses: saucelabs/sauce-connect-action@v2
+      with:
+          username: ${{ secrets.SAUCE_USERNAME }}
+          accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
+          tunnelIdentifier: github-action-tunnel
+          scVersion: 4.7.1
     - name: Integration test
       run: |
-        poetry run pytest tests/test_e2e.py
+        do
